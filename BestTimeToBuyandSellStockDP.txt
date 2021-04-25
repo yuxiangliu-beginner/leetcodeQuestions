@@ -11,7 +11,7 @@ public:
             if(prices[i]-minprice > maxProf)
                 maxProf = prices[i]-minprice;
 
-                cout<<0<<endl;
+                cout<<0111<<endl;
         }
         return maxProf;
     }
