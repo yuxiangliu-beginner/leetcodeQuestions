@@ -129,3 +129,39 @@ public:
 };
 
 // 4/10
+
+// valid sudoku
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        for(int i = 0 ; i < 9 ; i ++)
+        {
+            for(int j = 0; j < 9 ; j++)
+            {
+                if(board[i][j] != '.' && !isValid(board,i,j,board[i][j]))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    bool isValid(vector<vector<char>>& board,int row, int col , char num)
+    {
+        int a = 3*(row/3);
+        int b = 3*(col/3);
+        
+        for(int i = 0 ;i < 9; i ++)
+        {
+            if(i!=col && board[row][i]==num)
+                return false;
+            if(i!=row && board[i][col]==num)
+                return false;
+            if((a + i/3) != row && (b + 1%3) != col && board[a + i/3][b + i%3] == num) 
+                return false;
+            
+        }
+        return true;
+    }
+};
+// 5/10
