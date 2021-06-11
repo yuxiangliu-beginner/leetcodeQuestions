@@ -165,3 +165,148 @@ public:
     }
 };
 // 5/10
+// Search for range
+class Solution {
+public:
+    int getIndex(vector<int>& nums, int target)
+    {
+        int n = nums.size();
+        int ans = n;
+        int left = 0, right = n-1;
+        
+        while(left <=right)
+        {
+            int mid = left + (right-left)/2;
+            if(nums[mid]>=target)
+            {
+                ans = mid;
+                right = mid-1;
+            }
+            else
+            {
+                left = mid+1;
+            }
+        }
+        return ans;
+        
+    }
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int n = nums.size();
+        if(n==0)
+            return {-1,-1};
+        int first = getIndex(nums,target);
+        int second = getIndex(nums,target+1)-1;
+        
+        if(first <= second)
+            return {first,second};
+        else 
+            return {-1,-1};
+    }
+};
+// sort color
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        unordered_map<int,int> mp;
+        for(int i : nums)
+            mp[i]++;
+        
+        nums.clear();
+        for(int i = 0; i < 3; i ++ )
+        {
+            if(mp.find(i) !=mp.end())
+                for(int c= mp.find(i)->second; c > 0;c--)
+                {
+                    nums.push_back(i);
+                }
+        }
+    }
+};
+// 8/10
+// 3sum
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> res;
+        sort(nums.begin(),nums.end());
+        int len = nums.size();
+        if(len < 3)
+            return res;
+        
+        for(int i = 0 ; i < len-2; i++)
+        {
+          
+            if(i == 0 || (i>0 and nums[i] !=nums[i-1]))
+            {
+               
+                int l = i +1, r = len-1;
+                while(l<r)
+                { 
+                    if(nums[l] + nums[r] == (0-nums[i]))
+                    {
+                        vector<int> vt(3);
+                        vt[0] =nums[i];
+                        vt[1] =nums[l];
+                        vt[2] =nums[r];
+                        
+                        res.push_back(vt);
+                        while(l< r and nums[l]== nums[l+1])
+                            l++;
+                        while(l<r  and nums[r]== nums[r-1])
+                            r--;
+                        l++;
+                        r--;
+                    }else if(nums[l] + nums[r] <(0-nums[i]))
+                    {
+                        l++;
+                    }else{
+                        r--;
+                    }
+                        
+                }
+            }
+        }
+        
+        return res;
+    }
+};
+// 9/10
+// letter combination of phone number
+class Solution {
+public:
+    map<char,string>m;
+    vector<string> ans;
+    
+    void createCombinations(int start,string digits, string current)
+    {
+        if(start == digits.size())
+            ans.push_back(current);
+        
+        for(int i = 0 ; i < m[digits[start]].length();i++)
+        {
+            char s = m[digits[start]][i];
+            current+= s;
+            createCombinations(start+1,digits,current);
+            current.pop_back();
+        }
+        
+        
+        
+    }
+    
+    vector<string> letterCombinations(string digits) {
+        if(digits.length()<=0) return ans;
+        
+        m.insert({'2',"abc"});
+        m.insert({'3',"def"});
+        m.insert({'4',"ghi"});
+        m.insert({'5',"jkl"});
+        m.insert({'6',"mno"});
+        m.insert({'7',"pqrs"});
+        m.insert({'8',"tuv"});
+        m.insert({'9',"wxyz"});
+        
+        createCombinations(0,digits,""); //We're starting from indx 0 of digits and currently formed string is ""
+        return ans;
+    }
+};
