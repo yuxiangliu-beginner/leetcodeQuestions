@@ -1,0 +1,40 @@
+class Solution {
+public:
+    struct T{
+        int t, x , y;
+        T(int a, int b, int c ) : t(a), x(b),y(c){}
+        
+        bool operator<(const T &d) const {return t > d.t;}
+    };
+    int swimInWater(vector<vector<int>>& grid) {
+        int N = grid.size();
+        int ans = 0;
+        vector<vector<int>> seen(N,vector<int>(N,0));
+        priority_queue<T> pq;
+        pq.push(T(grid[0][0],0,0));
+        
+        static int dir[4][2]={{0,1},{0,-1},{1,0},{-1,0}};
+        while(true)
+        {
+            auto p = pq.top();
+            pq.pop();
+            ans = max(ans,p.t);
+            if(p.x==N-1 && p.y == N-1)
+                return ans;
+            
+            for(auto d : dir)
+            {
+                int i = p.x + d[0];
+                int j = p.y + d[1];
+                
+                if(i>=0 && i<N && j >= 0 && j < N &&!seen[i][j])
+                {
+                    seen[i][j] = 1;
+                    pq.push(T(grid[i][j],i,j));
+                }
+            }
+            
+        }
+    
+    }
+};
