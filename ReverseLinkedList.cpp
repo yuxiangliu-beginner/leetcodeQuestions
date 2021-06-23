@@ -10,60 +10,82 @@
  */
 class Solution {
 public:
-    ListNode* reverseBetween(ListNode* head, int left, int right) {
-        if(left == right)
-            return head;
+//     ListNode* ans;
+//     ListNode* reverse(ListNode* head,ListNode* res)
+//     {
+// //         if(head->next==nullptr)
+// //         {
+// //             res= head;
+// //             ans= head;
+// //             return head;
+// //         }
+            
+// //         ListNode* re = reverse(head->next,res);
+// //         res->next =  new ListNode(head->val);
+// //         res = res->next;
+// //         return head;
+//     }
+    ListNode* reverseList(ListNode* head) {
+        // ListNode* res = nullptr;
+        // return reverse(head,res);
+        
+//         if(!head || !(head->next))
+//             return head;
+//         ListNode * root = reverseList(head->next);
+//         head ->next->next = head;
+//         head->next = nullptr;
+//         return root;
         
         
-        ListNode* temp = head;
-        ListNode dummy(0);
         
-        ListNode* pre = &dummy;
-        ListNode* cur;
-        
-        dummy.next =head;
-        
-        for(int i =0  ; i <left-1;i++)
-        {
-            pre = pre->next;
-        }
-        cur=pre->next;
-        
-        
-        for(int i =0 ; i <right-left;i++)
-        {
-            ListNode * t = pre->next;
-            pre->next= cur->next;
-            cur->next = cur->next->next;
-            pre->next->next = t;
-        }
-        return dummy.next;
-        //find starting find
-//         if(temp->val==left)
-//             dummy.next = temp;
-//         else{
-//             while(temp->next->val != left)
-//             {
-//                 temp=temp->next;
-//             }
-//             dummy.next = temp->next;
-//             temp->next = nullptr;
+//         if (!head || !(head -> next)) {
+//             return head;
 //         }
-//         // ListNode tempHead(0);
-//         // tempHead.next =  dummy.next ;
+//         // ListNode* node = reverseList(head -> next);
+//         // cout<<node->val<<" "<<head->val<<endl;
+//         // head -> next -> next = head;
+//         // head -> next = NULL;
+//         // return node;
         
-//         ListNode* result = nullptr;
-//         ListNode* t = dummy.next;
-//         for(ListNode* cur = dummy.next ; cur->val!=right;cur = cur->next)
-//         {
-//             cout<<t->val<<endl;
-//             ListNode* current = new ListNode(t->val);
-//             current->next = result;
-//             result = current;
-//             t = t->next;
-//         }
+//         ListNode* node = reverseList(head -> next);
+//         head->next->next =head;
+//         head ->next = nullptr;
+//         return node;
         
-        temp->next = dummy.next;
-        return head;
-    }
+    // }
+        // ListNode* result = nullptr;
+        // ListNode* t = head;
+        // while (t != nullptr)
+        // {
+        //     ListNode* current = new ListNode(t->val);
+        //     current->next = result;
+        //     result = current;
+        //     t = t->next;
+        // }
+        // return result;
+        
+        
+        // //recursion
+        // if (!head || !(head -> next)) {
+        //     return head;
+        // }
+        // ListNode* node = reverseList(head -> next);
+        // head -> next -> next = head;
+        // head -> next = NULL;
+        // return node;
+        
+        //iterative
+        ListNode *pre = new ListNode(0), *cur = head;
+        pre -> next = head;
+        while (cur && cur -> next) {
+            ListNode* temp = pre -> next;
+            pre -> next = cur -> next;
+            cur -> next = cur -> next -> next;
+            pre -> next -> next = temp;
+        }
+        return pre -> next;
+        
+        
+        
+	}
 };
