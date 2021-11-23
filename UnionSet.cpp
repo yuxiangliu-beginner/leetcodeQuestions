@@ -30,7 +30,7 @@ public:
 	{
 		if(u!=parents_[u])
 			parents_[u] = Find(parents_[u]);
-		return parents_;
+		return parents_[u];
 	}
 private:
 	vector<int> parents_;
