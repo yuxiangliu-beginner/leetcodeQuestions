@@ -9,8 +9,7 @@ public:
 			parents_[i] = i;
 		}
 	}
-	bool union(int u ,int v)
-	{
+	bool Union(int u,int v){
 		int pu = Find(u);
 		int pv = Find(v);
 
@@ -35,4 +34,4 @@ public:
 private:
 	vector<int> parents_;
 	vector<int> rank_;
-}
+};
