@@ -1,3 +1,4 @@
+// https://leetcode.com/problems/zigzag-conversion/discuss/3435/If-you-are-confused-with-zigzag-patterncome-and-see!
 class Solution {
 public:
     string convert(string s, int numRows) {
@@ -7,18 +8,20 @@ public:
 //         vector<vector<string>> ans(numRows,vector<string>);
         vector<string> ans(numRows);
         int row = 0 ;
-        for(int i = 0 ; i < s.size(); i++)
+        for(int i = 0 ; i < s.size();i++)
         {
             if(conv)
                 ans[row].push_back(s[i]);
             else
                 ans[numRows-1-row].push_back(s[i]);
             row++;
+            
             if(row>=numRows)
             {
-                row = 1;
+                row =1;
                 conv = !conv;
             }
+            
         }
         string res="";
         for(int i = 0; i < ans.size(); i++)
